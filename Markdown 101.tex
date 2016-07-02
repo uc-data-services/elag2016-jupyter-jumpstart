@@ -1,0 +1,652 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Markdown 101}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Markdown 101: Lesson Goals}\label{markdown-101-lesson-goals}
+
+    \textbf{NOTE} - This lesson is adapted from Programming Historian's
+\href{https://github.com/programminghistorian/jekyll/blob/gh-pages/lessons/getting-started-with-markdown.md}{Getting
+Started with Markdown} * Intro to markdown, plain text-based syntax for
+formatting docs * markdown is integrated into the jupyter notebook
+
+    \subsection{What is markdown?}\label{what-is-markdown}
+
+    \begin{itemize}
+\tightlist
+\item
+  developed in 2004 by john gruber
+\item
+  a way of formatting text file
+\item
+  a perl utility for converting markdown into html
+\end{itemize}
+
+\textbf{plain text files} have many advantages of other formats 1. they
+are readable on virt. all devices 2. withstood the test of time (legacy
+word processing formats)
+
+by using markdown you'll be able to produce files that are legible in
+plain text and ready to be styled in other platforms
+
+ex: * blogging engines, static site generators, sites like (github)
+support markdown \& will render markdown into html * tools like pandoc
+convert files into and out of markdown
+
+    markdown files are saved in extention \texttt{.md} and can be opened in
+text editors like textedit, notepad, sublime text, or vim
+
+    We will be using the Jupyter notebook to write markdown in this lesson:
+
+    create a new jupyter document
+#### Headings
+    \paragraph{Headings}\label{headings}
+
+    Four levels of heading are avaiable in Markdown, and are indicated by
+the number of \texttt{\#} preceding the heading text. Paste the
+following examples into a code box.
+
+    \begin{verbatim}
+# First level heading
+## Second level heading
+### Third level heading
+#### Fourth level heading
+\end{verbatim}
+
+    \section{First level heading}\label{first-level-heading}
+
+\subsection{Second level heading}\label{second-level-heading}
+
+\subsubsection{Third level heading}\label{third-level-heading}
+
+\paragraph{Fourth level heading}\label{fourth-level-heading}
+
+    First and second level headings may also be entered as follows:
+
+\begin{verbatim}
+First level heading
+=======
+
+Second level heading
+----------
+\end{verbatim}
+
+    \section{First level heading}\label{first-level-heading}
+
+\subsection{Second level heading}\label{second-level-heading}
+
+    Notice how the Markdown syntax remains understandable even in the plain
+text version.
+
+    \paragraph{Paragraphs \& Line Breaks}\label{paragraphs-line-breaks}
+
+Try typing the following sentence into the textbox:
+
+\begin{verbatim}
+Welcome to the Jupyter Jumpstart.
+
+Today we'll be learning about Markdown syntax.
+This sentence is separated by a single line break from the preceding one.
+\end{verbatim}
+
+    \textbf{This renders as:}
+
+Welcome to Jupyter Jumpstart.
+
+Today we'll be learning about Markdown syntax. This sentence is
+separated by a single line break from the preceding one.
+
+    \begin{itemize}
+\tightlist
+\item
+  Paragraphs must be separated by an empty line
+\item
+  leave an empty line between \texttt{syntax} and \texttt{This}
+\item
+  some implementations of Markdown, single line breaks must also be
+  indicated with two empty spaces at the end of each line
+\end{itemize}
+
+    \paragraph{Adding Emphasis}\label{adding-emphasis}
+
+    \begin{itemize}
+\tightlist
+\item
+  Text can be italicized by wrapping the word in \texttt{*} or
+  \texttt{\_} symbols
+\item
+  bold text is written by wrapping the word in \texttt{**} or
+  \texttt{\_}
+\end{itemize}
+
+    Try adding emphasis to a sentence using these methods:
+
+\begin{verbatim}
+I am **very** excited about the _Jupyter Jumpstart_ workshop.
+\end{verbatim}
+
+    \textbf{This renders as:}
+
+I am \textbf{very} excited about the \emph{Jupyter Jumpstart} lessons.
+
+    \paragraph{Making Lists}\label{making-lists}
+
+    Markdown includes support for ordered and unordered lists. Try typing
+the following list into the textbox:
+
+\begin{verbatim}
+Shopping List
+----------
+* Fruits
+  * Apples
+  * Oranges
+  * Grapes
+* Dairy
+  * Milk
+  * Cheese
+\end{verbatim}
+
+Indenting the \texttt{*} will allow you to created nested items.
+
+    \textbf{This renders as:}
+
+\subsection{Shopping List}\label{shopping-list}
+
+\begin{itemize}
+\tightlist
+\item
+  Fruits
+\item
+  Apples
+\item
+  Oranges
+\item
+  Grapes
+\item
+  Dairy
+\item
+  Milk
+\item
+  Cheese
+\end{itemize}
+
+    \textbf{Ordered lists} are written by numbering each line. Once again,
+the goal of Markdown is to produce documents that are both legible as
+plain text and able to be transformed into other formats.
+
+\begin{verbatim}
+To-do list
+----------
+1. Finish Markdown tutorial
+2. Go to grocery store
+3. Prepare lunch
+\end{verbatim}
+
+    \textbf{This renders as:}
+
+\subsection{To-do list}\label{to-do-list}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Finish Markdown tutorial
+\item
+  Go to grocery store
+\item
+  Prepare lunch
+\end{enumerate}
+
+    \textbf{This renders as:}
+
+\subsection{To-do list}\label{to-do-list}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Finish Markdown tutorial
+\item
+  Go to grocery store
+\item
+  Prepare lunch
+\end{enumerate}
+
+NOTE the proper order doesn't matter.
+
+    \paragraph{Code Snippets}\label{code-snippets}
+
+    \begin{itemize}
+\tightlist
+\item
+  Represent code by wrapping snippets in back-tick characters like `````
+\item
+  for example \texttt{`\textless{}br\ /\textgreater{}`}
+\item
+  whole blocks of code are written by typing three backtick characters
+  before and after each block
+\end{itemize}
+
+Try typing the following text into the textbox:
+
+\begin{verbatim}
+```html
+<html>
+    <head>
+        <title>Website Title</title>
+    </head>
+    <body>
+    </body>
+</html>
+```
+\end{verbatim}
+
+    \textbf{This renders as}:
+
+\begin{verbatim}
+    <html>
+        <head>
+            <title>Website Title</title>
+        </head>
+        <body>
+        </body>
+    </html>
+\end{verbatim}
+
+    \textbf{specific languages}
+
+in jupyter you can specify specific lanauages for code syntax hylighting
+
+example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\ControlFlowTok{for} \NormalTok{item }\OperatorTok{in} \NormalTok{collection:}
+    \BuiltInTok{print}\NormalTok{(item)}
+\end{Highlighting}
+\end{Shaded}
+
+note how the keywords in python are highlighted
+
+    \paragraph{Blockquotes}\label{blockquotes}
+
+Adding a \texttt{\textgreater{}} before any paragraph will render it as
+a blockquote element.
+
+Try typing the following text into the textbox:
+
+\begin{verbatim}
+> Hello, I am a paragraph of text enclosed in a blockquote. Notice how I am offset from the left margin. 
+\end{verbatim}
+
+\textbf{This renders as:}
+
+\begin{quote}
+Hello, I am a paragraph of text enclosed in a blockquote. Notice how I
+am offset from the left margin.
+\end{quote}
+
+    \paragraph{Links}\label{links}
+
+\begin{itemize}
+\tightlist
+\item
+  Inline links are written by enclosing the link text in square brackets
+  first, then including the URL and optional alt-text in round brackets
+\end{itemize}
+
+\texttt{For\ more\ tutorials,\ please\ visit\ the\ {[}Programming\ Historian{]}(http://programminghistorian.org/\ "Programming\ Historian\ main\ page").}
+
+\textbf{This renders as:}
+
+For more tutorials, please visit the
+\href{http://programminghistorian.org/}{Programming Historian}.
+
+    \paragraph{Images}\label{images}
+
+Images can be referenced using \texttt{!}, followed by some alt-text in
+square brackets, followed by the image URL and an optional title. These
+will not be displayed in your plain text document, but would be embedded
+into a rendered HTML page.
+
+\texttt{!{[}Wikipedia\ logo{]}(http://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg\ "Wikipedia\ logo")}
+
+\textbf{This renders as:}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{http://upload.wikimedia.org/wikipedia/en/8/80/Wikipedia-logo-v2.svg}
+\caption{Wikipedia logo}
+\end{figure}
+
+    \paragraph{Horizontal Rules}\label{horizontal-rules}
+
+Horizontal rules are produced when three or more \texttt{-}, \texttt{*}
+or \texttt{\_} are included on a line by themselves, regardless of the
+number of spaces between them. All of the following combinations will
+render horizontal rules:
+
+\begin{verbatim}
+___
+* * *
+- - - - - -
+\end{verbatim}
+
+\textbf{This renders as:}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+***\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \paragraph{Tables}\label{tables}
+
+The core Markdown spec does not include tables; however, some sites and
+applications use variants of Markdown that may include tables and other
+special features.
+\href{https://help.github.com/articles/github-flavored-markdown/}{GitHub
+Flavored Markdown} is one of these variants, and is used to render
+\texttt{.md} files in the browser on the GitHub site.
+
+To create a table within GitHub, use pipes \texttt{\textbar{}} to
+separate columns and hyphens \texttt{-} between your headings and the
+rest of the table content. While pipes are only strictly necessary
+between columns, you may use them on either side of your table for a
+more polished look. Cells can contain any length of content, and it is
+not necessary for pipes to be vertically aligned with each other.
+
+\begin{verbatim}
+| Heading 1 | Heading 2 | Heading 3 |
+| --------- | --------- | --------- |
+| Row 1, column 1 | Row 1, column 2 | Row 1, column 3|
+| Row 2, column 1 | Row 2, column 2 | Row 2, column 3|
+| Row 3, column 1 | Row 3, column 2 | Row 3, column 3|
+\end{verbatim}
+
+\textbf{This renders as:}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Heading 1 & Heading 2 & Heading 3\tabularnewline
+\midrule
+\endhead
+Row 1, column 1 & Row 1, column 2 & Row 1, column 3\tabularnewline
+Row 2, column 1 & Row 2, column 2 & Row 2, column 3\tabularnewline
+Row 3, column 1 & Row 3, column 2 & Row 3, column 3\tabularnewline
+\bottomrule
+\end{longtable}
+
+To specify the alignment of each column, colons \texttt{:} can be added
+to the header row as follows:
+
+\begin{verbatim}
+| Left-aligned | Centered | Right-aligned |
+| :-------- | :-------: | --------: |
+| Apples | Red | 5000 |
+| Bananas | Yellow | 75 |
+\end{verbatim}
+
+\textbf{This renders as:}
+
+\begin{longtable}[]{@{}lcr@{}}
+\toprule
+Left-aligned & Centered & Right-aligned\tabularnewline
+\midrule
+\endhead
+Apples & Red & 5000\tabularnewline
+Bananas & Yellow & 75\tabularnewline
+\bottomrule
+\end{longtable}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
